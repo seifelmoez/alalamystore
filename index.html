@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALALAMY STORE</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505;font-family:Arial,Helvetica,sans-serif}
+body{
+  background:#050505 url("background.png") center center / cover no-repeat;
+  color:#fff;
+}
+.overlay{
+  position:fixed;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.08) 55%,rgba(0,0,0,.45));
+  pointer-events:none;
+}
+.scanlines{
+  position:fixed;inset:0;pointer-events:none;opacity:.08;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px);
+  mix-blend-mode:screen;
+}
+.top{
+  position:absolute;left:2.2vw;right:2.2vw;top:18px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:clamp(12px,1.2vw,20px);letter-spacing:2px;
+  text-shadow:0 0 12px #f00;
+}
+.brand{font-weight:800;color:#ff2525}
+.brand span{color:#fff;font-weight:500}
+.status{color:#aaa}
+.bottom{
+  position:absolute;left:2.2vw;right:2.2vw;bottom:18px;
+  display:flex;justify-content:space-between;align-items:end;
+  font-size:clamp(11px,1vw,16px);letter-spacing:1.5px;color:#888;
+}
+.ready{color:#e21d25}
+.loader{
+  position:absolute;left:50%;bottom:7.5%;transform:translateX(-50%);
+  width:min(52vw,820px);text-align:center;
+}
+.loader .text{font-size:clamp(16px,2vw,29px);letter-spacing:3px;margin-bottom:12px}
+.track{
+  height:14px;border:1px solid #5e1010;border-radius:999px;
+  background:rgba(0,0,0,.7);overflow:hidden;box-shadow:0 0 15px rgba(255,0,0,.15)
+}
+.bar{
+  height:100%;width:63%;border-radius:999px;
+  background:linear-gradient(90deg,#9e0000,#ff2525,#a60000);
+  box-shadow:0 0 16px #f00;animation:pulse 1.4s ease-in-out infinite alternate
+}
+.wait{margin-top:10px;color:#aaa;letter-spacing:2px;font-size:13px}
+@keyframes pulse{from{filter:brightness(.8)}to{filter:brightness(1.35)}}
+@media(max-width:700px){
+  .loader{width:75vw;bottom:9%}
+  .top{top:12px}
+  .bottom{bottom:10px}
+}
+</style>
+</head>
+<body>
+<div class="overlay"></div><div class="scanlines"></div>
+<div class="top">
+  <div class="brand">ALALAMY <span>STORE</span></div>
+  <div class="status">PS4 / 9.00</div>
+</div>
+<div class="loader">
+  <div class="text" id="detect">DETECTING FIRMWARE...</div>
+  <div class="track"><div class="bar" id="bar"></div></div>
+  <div class="wait">PLEASE WAIT</div>
+</div>
+<div class="bottom">
+  <div>PS4 9.00</div>
+  <div>ALALAMY STORE - GAMES WORLD</div>
+  <div class="ready" id="ready">READY</div>
+</div>
+<script>
+let p=63;
+const bar=document.getElementById('bar');
+const detect=document.getElementById('detect');
+setInterval(()=>{
+  p += (Math.random()*2.2-.55);
+  if(p>96)p=96;
+  if(p<60)p=60;
+  bar.style.width=p+'%';
+},700);
+setTimeout(()=>detect.textContent='ALALAMY STORE — INITIALIZING...',2200);
+setTimeout(()=>detect.textContent='READY TO START',5200);
+</script>
+</body>
+</html>
